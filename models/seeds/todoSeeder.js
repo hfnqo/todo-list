@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 mongoose.set('strictQuery', false)
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URL)
 
 const db = mongoose.connection
 

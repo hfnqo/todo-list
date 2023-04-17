@@ -2,13 +2,12 @@
 const express = require('express')
 const router = express.Router()
 
-// 引入 home, todo 模組
 const home = require('./modules/home')
 const todos = require('./modules/todos')
+const users = require('./modules/users')
 
-// 將網址結構符合 /, /todos 字串的 requset 導向 home, todos 模組
 router.use('/', home)
 router.use('/todos', todos)
+router.use('/users', users)
 
-// 匯出路由器
 module.exports = router

@@ -5,9 +5,11 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
 const routes = require('./routes')
-require('./config/mongoose')
-const app = express()
 
+const usePassport = require('./config/passport')
+require('./config/mongoose')
+
+const app = express()
 
 app.engine('hbs', engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
@@ -21,6 +23,8 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }))
 // 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
+
+usePassport(app)
 
 app.use(routes)
 

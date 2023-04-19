@@ -10,6 +10,7 @@ const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 const app = express()
+const PORT = process.env.PORT || 3000
 
 app.engine('hbs', engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
@@ -26,8 +27,14 @@ app.use(methodOverride('_method'))
 
 usePassport(app)
 
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
+
 app.use(routes)
 
-app.listen(3000, () => {
-  console.log('App is running on http://localhost:3000')
+app.listen(PORT, () => {
+  console.log(`App is running on http://localhost:${PORT}`)
 })

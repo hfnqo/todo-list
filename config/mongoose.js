@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const MONGODB_URI = process.env.MONGODB_URI
 
 // 僅在非正式還境時，使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
@@ -6,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 mongoose.set('strictQuery', false)
-mongoose.connect(process.env.MONGODB_URL)  // 設定連線到 mongoDB
+mongoose.connect(process.env.MONGODB_URI)  // 設定連線到 mongoDB
 
 // 取得資料庫連線狀態
 const db = mongoose.connection
